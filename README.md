@@ -3,7 +3,9 @@
 
 A chatbot with conversation and personalization using IBM API.
 
-For running the application you need to go to the directory and run the command 'node app'.
+For running the application you need to go to the directory 'chatbot' and run the command 'node app'.
+
+Direct to http://localhost:3000
 
 The database is empty. So initially before logging in you need to register.
 You can login after registering.
