@@ -2,7 +2,7 @@
 
 A chatbot with conversation and personalization using IBM API.
 
-Go to the repository and you can run the application using the command: node app
+You can run the application using the command: node app
 
 The database is empty. So initially for logging in you need to register yourselves first.
 You can login after registering.
