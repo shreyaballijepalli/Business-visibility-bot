@@ -13,6 +13,7 @@ You can login after registering.
 Once you login, you will be directed to the chatbot.
 
 You can ask any valid question to the chatbot.
+If you have a password to your mysql database you need to include it in the password section of sql.php file.
 
 Presently the number of customers are limited to 10.
 
