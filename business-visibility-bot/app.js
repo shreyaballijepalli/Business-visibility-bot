@@ -148,6 +148,12 @@ app.post('/api/message', function(req, res) {
       }
     });
   }
+
+/* var req_input = req.body.input;
+ for(var key in req_input) {
+   console.log("text:"+key,"value:"+ myjson[key]);
+}*/
+
   var payload = {
     workspace_id: workspace,
     context: req.body.context || {},
