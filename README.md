@@ -1,21 +1,22 @@
-# Business-visibility-bot
 **WORK IN PROGRESS**
 
 A chatbot with conversation and personalization using IBM API.
 
-For running the application you need to go to the directory 'chatbot' and run the command 'node app'.
+For running the application go to the directory and run the command node app.
 
-Direct to http://localhost:3000
+If the database is updated run the command node update and import the chat.json file in the workspace.
 
-The database is empty. So initially before logging in you need to register.
-You can login after registering.
+For convinience I have currently included my username,password and workspace id in the .env file. 
 
-Once you login, you will be directed to the chatbot.
+But later you need to create your own service and include those details in the .env file.
 
-You can ask any valid question to the chatbot.
-If you have a password to your mysql database you need to include it in the password section of sql.php file.
+You will have to include the mysql database password in the following files:
 
-Presently the number of customers are limited to 10.
+In sql.php file line number 461,
+   app.js line number 95
 
+In users.js in routes folder line number 15
+
+Currently as no users were logged in yet the suggestions box will be empty.
 
  
