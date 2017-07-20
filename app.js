@@ -92,7 +92,7 @@ var conversation = new Conversation({
  var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Shreya@98",
+  password: "",
   database: "USERS"
 });
 
