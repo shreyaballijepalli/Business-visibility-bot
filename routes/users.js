@@ -12,7 +12,7 @@ var Conversation = require('watson-developer-cloud/conversation/v1');
  var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "Shreya@98",
+  password: "",
   database: "USERS"
 });
 
