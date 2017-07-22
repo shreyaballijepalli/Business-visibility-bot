@@ -50,7 +50,6 @@ CREATE TABLE IF NOT EXISTS sql_customers(
 You can run app.js to run the application.
 Run update.js to update the workspace whenever you are updating the database.
 
-Date and natural language understanding will be updated soon.
 
 
 
