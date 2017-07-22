@@ -1,4 +1,4 @@
-**WORK IN PROGRESS**
+
 
 A chatbot with conversation and personalization using IBM API.
 
