@@ -156,7 +156,9 @@ if(result.length>100)
 });
 
 
+
 app.post('/api/message', function(req, res) {
+  var time1= Date.now();
   var workspace = process.env.WORKSPACE_ID || '<workspace-id>';
   if (!workspace || workspace === '<workspace-id>') {
     return res.json({
@@ -237,6 +239,7 @@ if(result.length>100)
     }
     return res.json(updateMessage(payload, data));
   });
+
 });
 
 

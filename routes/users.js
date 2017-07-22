@@ -89,6 +89,7 @@ router.get('/conversation',function(req,res){
        if (err) throw err; 
        var arr = conversation.slice(conversation.length-10,conversation.length);
        res.render('index',{conversation:arr});
+     
 
     });
 

@@ -35,7 +35,13 @@ if($sum_count==0)
 return 0;
 
 else
-return $sum_time/$sum_count;
+{
+$avg1 = $sum_time/$sum_count;
+$avg2 = number_format($avg1,2);
+return (float)$avg2;
+
+}
+
 
 }
 
@@ -61,14 +67,19 @@ return 0;
 function find_parent_requests($data_array,$c)
 {
     $count = 0;
+    $ticket = array();
 
     for($i=0;$i<sizeof($data_array);$i++)
 {
 
     if (strpos($c,$data_array[$i]['Account_Name'])!=false)
 {
-    if(strcmp($data_array[$i]['Category'],"S - PER - parent request")==0)
+    if(strcmp($data_array[$i]['Category'],"S - PER - parent request")==0 && search($data_array[$i]['Ticket_Number'],$ticket)==0)
+{
+    $ticket[$count]=$data_array[$i]['Ticket_Number'];
     $count++;
+
+}
 
 }
 
@@ -111,7 +122,10 @@ for($i=0;$i<$count;$i++)
    $variance=$variance+$temp*$temp;
 } 
 
-return sqrt($variance/$count);
+$dev1 = sqrt($variance/$count);
+$dev2 = number_format($dev1, 2);
+
+return (float)$dev2;
 
 }
 
@@ -140,14 +154,18 @@ return $count;
 function find_new_partners($data_array,$c)
 {
    $count = 0;
+   $ticket = array();
 
     for($i=0;$i<sizeof($data_array);$i++)
 {
 
      if (strpos($c,$data_array[$i]['Account_Name'])!=false)
 {
-    if(strcmp($data_array[$i]['Category'],"S - PER - New TP")==0)
+    if(strcmp($data_array[$i]['Category'],"S - PER - New TP")==0 && search($data_array[$i]['Ticket_Number'],$ticket)==0 )
+{
+    $ticket[$count] = $data_array[$i]['Ticket_Number'];
     $count++;
+}
 
 }
 
@@ -163,13 +181,18 @@ return $count;
 function find_map_changes($data_array,$c)
 {
     $count = 0;
+    $ticket = array();
 
     for($i=0;$i<sizeof($data_array);$i++)
 {
     if (strpos($c,$data_array[$i]['Account_Name'])!=false)
 {
-    if(strcmp($data_array[$i]['Category'],"S - PER - Map Change")==0)
+    if(strcmp($data_array[$i]['Category'],"S - PER - Map Change")==0 && search($data_array[$i]['Ticket_Number'],$ticket)==0 )
+{
+    $ticket[$count] = $data_array[$i]['Ticket_Number'];
     $count++;
+
+}
 
 }
 
@@ -185,14 +208,19 @@ return $count;
 function find_new_maps($data_array,$c)
 {
    $count = 0;
+   $ticket = array();
 
     for($i=0;$i<sizeof($data_array);$i++)
 {
 
     if (strpos($c,$data_array[$i]['Account_Name'])!=false)
 {
-    if(strcmp($data_array[$i]['Category'],"S - PER - New Map")==0)
+    if(strcmp($data_array[$i]['Category'],"S - PER - New Map")==0 && search($data_array[$i]['Ticket_Number'],$ticket)==0)
+{
+    $ticket[$count] = $data_array[$i]['Ticket_Number'];
     $count++;
+}
+
 
 }
 
@@ -209,14 +237,19 @@ return $count;
 function find_communication_requests($data_array,$c)
 {
     $count = 0;
+    $ticket = array();
 
     for($i=0;$i<sizeof($data_array);$i++)
 {
 
     if (strpos($c,$data_array[$i]['Account_Name'])!=false)
 {
-    if(strcmp($data_array[$i]['Category'],"S - PER - Communication")==0)
+    if(strcmp($data_array[$i]['Category'],"S - PER - Communication")==0 && search($data_array[$i]['Ticket_Number'],$ticket)==0)
+{
+   $ticket[$count] = $data_array[$i]['Ticket_Number'];
     $count++;
+
+}
 
 }
 
@@ -234,7 +267,7 @@ function find_other($data_array,$c)
 {
     $count = 0;
     $other = array("Other","S - Administration","S - Code List Update","S - Communication problem","S - Communications change","S - Configuration changes","S - Data Tracking/Restart","S - Enhancement Request Implementation","S - FYI/Other","S - IBM Outage/instability","S - Info/Question/How To","S - Internal IBM","S - Map Change","S - Map Research","S - Mapping Request","S - Outage non-IBM","S - Proactive Notification","S - Project","S - Reporting","S - Service Request","S - Set up","S - Testing","S - Troubleshoot","");
-    
+    $ticket = array();
 
     for($i=0;$i<sizeof($data_array);$i++)
 {
@@ -242,8 +275,13 @@ function find_other($data_array,$c)
 {
      for($j=0;$j<sizeof($other);$j++)
 {
-    if(strcmp($data_array[$i]['Category'],$other[$j])==0)
+    if(strcmp($data_array[$i]['Category'],$other[$j])==0 && search($data_array[$i]['Ticket_Number'],$ticket)==0)
+{
+   $ticket[$count] = $data_array[$i]['Ticket_Number'];
     $count++;
+
+}
+
 }
     
     
@@ -261,13 +299,18 @@ return $count;
 function find_tp_contact($data_array,$c)
 {
     $count = 0;
+    $ticket = array();
 
     for($i=0;$i<sizeof($data_array);$i++)
 {
     if (strpos($c,$data_array[$i]['Account_Name'])!=false)
 {
-    if(strcmp($data_array[$i]['Category'],"S - PER TP Contact List Update")==0)
+    if(strcmp($data_array[$i]['Category'],"S - PER TP Contact List Update")==0 && search($data_array[$i]['Ticket_Number'],$ticket)==0)
+{
+   $ticket[$count] = $data_array[$i]['Ticket_Number'];
     $count++;
+
+}
 
 }
 
@@ -283,15 +326,17 @@ return $count;
 function find_internal_tickets($data_array,$c)
 {
     $count = 0;
+    $ticket = array();
 
     for($i=0;$i<sizeof($data_array);$i++)
-{
-
-  
+{ 
     if (strpos($c,$data_array[$i]['Account_Name'])!=false)
 {
-    if(strcmp($data_array[$i]['Category'],"S - PER - Other")==0)
+    if(strcmp($data_array[$i]['Category'],"S - PER - Other")==0 && search($data_array[$i]['Ticket_Number'],$ticket)==0)
+{
+    $ticket[$count] = $data_array[$i]['Ticket_Number'];
     $count++;
+}
 
 }
 
@@ -353,13 +398,19 @@ function find_tickets_category($data_array,$c)
 function find_tickets_closed($data_array,$c)
 {
     $count = 0;
+    $ticket = array();
 
     for($i=0;$i<sizeof($data_array);$i++)
 {
     if (strpos($c,$data_array[$i]['Account_Name'])!=false)
 {
-    if(strcmp($data_array[$i]['Status'],"Closed")==0)
+    if(strcmp($data_array[$i]['Status'],"Closed")==0 && search($data_array[$i]['Ticket_Number'],$ticket)==0)
+{
+   
+    $ticket[$count] = $data_array[$i]['Ticket_Number'];
     $count++;
+
+}
 
 }
 
@@ -381,7 +432,7 @@ $dbpass = '';
 $connect = mysql_connect($dbhost, $dbuser, $dbpass) or die('Database Not Connected. Please Fix the Issue! ' . mysql_error()); 
 
 
-mysql_select_db("REPORT_FINAL",$connect);
+mysql_select_db("USERS",$connect);
 
 $query = "SELECT * FROM sql_table";
  
@@ -437,6 +488,7 @@ $content['entities'][0]['values'][$i]['synonyms'] = [];
 
 }
 
+
 $count_node = 0;
 
 for($j=0;$j<12;$j++)
@@ -445,26 +497,26 @@ for($j=0;$j<12;$j++)
 
  for($i=0;$i<$count+1;$i++)
 {
-   $content['dialog_nodes'][$count_node+14]['type']= "response_condition";
-   $content['dialog_nodes'][$count_node+14]['go_to']= null;
-   $content['dialog_nodes'][$count_node+14]['title']= null;
-   $content['dialog_nodes'][$count_node+14]['output']['text']['values'][0]= "";
-   $content['dialog_nodes'][$count_node+14]['output']['text']['selection_policy']= "sequential";
-   $content['dialog_nodes'][$count_node+14]['parent']= $intents[$j];
-   $content['dialog_nodes'][$count_node+14]['context']=null;
-   $content['dialog_nodes'][$count_node+14]['created']="2017-07-03T08:28:18.340Z";
-   $content['dialog_nodes'][$count_node+14]['updated']="2017-07-02T14:05:55.127Z";
-   $content['dialog_nodes'][$count_node+14]['metadata']=null;
+   $content['dialog_nodes'][$count_node+16]['type']= "response_condition";
+   $content['dialog_nodes'][$count_node+16]['go_to']= null;
+   $content['dialog_nodes'][$count_node+16]['title']= null;
+   $content['dialog_nodes'][$count_node+16]['output']['text']['values'][0]= "";
+   $content['dialog_nodes'][$count_node+16]['output']['text']['selection_policy']= "sequential";
+   $content['dialog_nodes'][$count_node+16]['parent']= $intents[$j];
+   $content['dialog_nodes'][$count_node+16]['context']=null;
+   $content['dialog_nodes'][$count_node+16]['created']="2017-07-03T08:28:18.340Z";
+   $content['dialog_nodes'][$count_node+16]['updated']="2017-07-02T14:05:55.127Z";
+   $content['dialog_nodes'][$count_node+16]['metadata']=null;
    if($i==$count)
-   $content['dialog_nodes'][$count_node+14]['conditions']=null;
+   $content['dialog_nodes'][$count_node+16]['conditions']=null;
    else
-   $content['dialog_nodes'][$count_node+14]['conditions']="@client_name:".$customer_database[$i];
-   $content['dialog_nodes'][$count_node+14]['description']=null;
-   $content['dialog_nodes'][$count_node+14]['dialog_node']="node".($count_node+1);
+   $content['dialog_nodes'][$count_node+16]['conditions']="@client_name:".$customer_database[$i];
+   $content['dialog_nodes'][$count_node+16]['description']=null;
+   $content['dialog_nodes'][$count_node+16]['dialog_node']="node".($count_node+1);
    if($i==0)
-   $content['dialog_nodes'][$count_node+14]['previous_sibling']=null;
+   $content['dialog_nodes'][$count_node+16]['previous_sibling']=null;
    else
-   $content['dialog_nodes'][$count_node+14]['previous_sibling']="node".($count_node);
+   $content['dialog_nodes'][$count_node+16]['previous_sibling']="node".($count_node);
    
    $count_node++;
 
@@ -496,7 +548,7 @@ $customer = array();
 
 for($i=0;$i<12*($count+1);$i++)
 {
-   $customer[$i]= $content['dialog_nodes'][$i+14]['conditions'];
+   $customer[$i]= $content['dialog_nodes'][$i+16]['conditions'];
 }
 
 
@@ -507,7 +559,7 @@ $question = array();
 
 for($i=0;$i<12*($count+1);$i++)
 {
-$question[$i] = $content['dialog_nodes'][$i+14]['parent'];
+$question[$i] = $content['dialog_nodes'][$i+16]['parent'];
 }
 
 
@@ -523,11 +575,12 @@ for($i=0;$i<12*($count+1);$i++)
 if (strcmp($question[$i],"average time")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
 {
     $t= find_time($data_array,$customer[$i]);
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($t);
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($t);
 }
      //echo $t;
 
@@ -536,11 +589,12 @@ if (strcmp($question[$i],"average time")==0)
 else if (strcmp($question[$i],"parent requests")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
 {
     $p=find_parent_requests($data_array,$customer[$i]); 
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p);
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p);
 }
     
      
@@ -549,11 +603,12 @@ else if (strcmp($question[$i],"parent requests")==0)
 else if (strcmp($question[$i],"standard deviation")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
 {
    $p=find_standard_deviation($data_array,$customer[$i]); 
-   $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p);
+   $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p);
 }
      
 }
@@ -562,11 +617,12 @@ else if (strcmp($question[$i],"standard deviation")==0)
  else if (strcmp($question[$i],"closed cases")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
-{
+{  
     $p=find_closed_cases($data_array,$customer[$i]); 
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p);
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p);
 }
     
      
@@ -575,11 +631,12 @@ else if (strcmp($question[$i],"standard deviation")==0)
 else if (strcmp($question[$i],"new partners")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
 {
     $p=find_new_partners($data_array,$customer[$i]); 
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p);
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p);
 }
     
      
@@ -588,11 +645,12 @@ else if (strcmp($question[$i],"new partners")==0)
 else if (strcmp($question[$i],"map changes")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
 {
     $p=find_map_changes($data_array,$customer[$i]); 
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p);
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p);
 }
         
 }
@@ -600,11 +658,13 @@ else if (strcmp($question[$i],"map changes")==0)
 else if (strcmp($question[$i],"new maps")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
+
     else
 {
     $p=find_new_maps($data_array,$customer[$i]);
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p);
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p);
 }
     
      
@@ -613,11 +673,12 @@ else if (strcmp($question[$i],"new maps")==0)
 else if (strcmp($question[$i],"communication requests")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
 {
     $p=find_communication_requests($data_array,$customer[$i]); 
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p);  
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p);  
 }
    
 }
@@ -625,11 +686,12 @@ else if (strcmp($question[$i],"communication requests")==0)
 else if (strcmp($question[$i],"tickets")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
 {
     $p=find_tickets_total($data_array,$customer[$i]); 
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p);  
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p);  
 }
    
 }
@@ -637,11 +699,12 @@ else if (strcmp($question[$i],"tickets")==0)
 else if (strcmp($question[$i],"tickets total")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+  
     else
 {
     $p=find_tickets_total($data_array,$customer[$i]); 
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p);  
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p);  
 }
   
 }
@@ -649,11 +712,12 @@ else if (strcmp($question[$i],"tickets total")==0)
 else if (strcmp($question[$i],"tickets category")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
 {
     $p=find_tickets_category($data_array,$customer[$i]);
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p); 
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p); 
 }
   
 }
@@ -661,11 +725,12 @@ else if (strcmp($question[$i],"tickets category")==0)
 else if (strcmp($question[$i],"tickets closed")==0)
 {
     if(is_null($customer[$i]))
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]="You need to mention the name of the client";
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]="You need to mention the correct name of the client";
+
     else
 {
     $p=find_tickets_closed($data_array,$customer[$i]); 
-    $content['dialog_nodes'][$i+14]['output']['text']['values'][0]=json_encode($p); 
+    $content['dialog_nodes'][$i+16]['output']['text']['values'][0]=json_encode($p); 
 }
 
    

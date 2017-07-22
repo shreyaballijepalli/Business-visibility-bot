@@ -12,7 +12,7 @@ body {
 
 div {
   word-wrap: break-word;
-  line-height: 2.1rem;
+  line-height: 1.25rem;
 }
 
 .button_question {
@@ -28,20 +28,7 @@ div {
     cursor: pointer;
 }
 
-#view-change-button img {
-  display: none;
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
-}
 
-#view-change-button:not(.full) .not-full {
-  display: inline-block;
-}
-
-#view-change-button.full .full {
-  display: inline-block;
-}
 
 #contentParent {
   height: 100%;
@@ -67,8 +54,7 @@ div {
 
 #chat-column-holder {
   text-align: center;
-  width: 100%;
-  min-height:850px;
+
 }
 
 .chat-column {
@@ -77,19 +63,21 @@ div {
   margin: auto;
   text-align: left;
   max-width: 25rem;
+  min-height:700px;
   min-width: 9.375rem;
+
 }
 
 #scrollingChat {
   margin: 0.75rem;
   overflow-y: auto;
   overflow-x: hidden;
-  height: calc(100% - 4rem);
+  height: calc(750px);
 }
 
 .message-inner {
   opacity: 0;
-  margin-top: 0.9375rem;
+  margin-top: 1.9375rem;
   -webkit-transition-property: opacity, margin-top;
   -webkit-transition-duration: 0.75s;
   -webkit-transition-timing-function: ease-in;
@@ -237,8 +225,8 @@ input:-moz-placeholder {
 .inputOutline {
   display: block;
   border-bottom: 0.0625rem solid #aeaeae;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 #textInputDummy {
@@ -253,22 +241,21 @@ input:-moz-placeholder {
   font-family: Monaco, monospace;
   font-size: 0.75rem;
   letter-spacing: 0;
-  line-height: 100px;
+  line-height: 1.125rem;
   background-color: #23292A;
   color: #fff;
   overflow-x: auto;
+
   width: 85%;
-  min-width: 400px;
+  min-width: 29.6875rem;
   margin-right:-500px;
-  padding:4px;
 
 }
 
 #payload-column.full {
   width: 100%;
-  max-width: 400px;
-  min-width: 200px;
-  margin-left:500px;
+  max-width: none;
+  min-width: initial;
 
 }
 
@@ -280,7 +267,6 @@ input:-moz-placeholder {
   padding: 0.5rem;
   padding-left: 2.5rem;
   background: #383D3E;
-
 }
 
 .hide {
@@ -331,15 +317,12 @@ html{
 
   .chat-column {
     padding-top: 4rem;
-    width: 1rem;
-    min-height:1000px;
   }
 
   #payload-column {
     width: 0;
     max-width: none;
     min-width: initial;
-    min-height:100px;
   }
 }
 
