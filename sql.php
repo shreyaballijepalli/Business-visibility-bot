@@ -442,7 +442,7 @@ return $count;
 
 $dbhost = 'localhost';
 $dbuser = 'root';
-$dbpass = 'Shreya@98';
+$dbpass = '';
 
 
 
