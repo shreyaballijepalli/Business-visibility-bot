@@ -1,0 +1,106 @@
+<html>
+<head>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta property="og:image" content="conversation.svg" />
+  <meta property="og:title" content="Conversation Chat Simple" />
+  <meta property="og:description" content="Sample application that shows how to use the Conversation API to identify user intents" />
+  <link rel="stylesheet" type="text/css" href="css/app.css">
+</head>
+<body>
+  <div id="contentParent" class="responsive-columns-wrapper">
+    <div id="chat-column-holder" class="responsive-column content-column">
+      <div class="chat-column">
+        <div id="scrollingChat"></div>
+        <label for="textInput" class="inputOutline">
+          <input id="textInput" class="input responsive-column"
+            placeholder="Type something" type="text"
+            onkeydown="ConversationPanel.inputKeyDown(event, this)">
+        </label>
+      </div>
+    </div>
+
+        <div id="payload-column" class="fixed-column content-column">
+        <h1 style="color:white; font-family:verdana; text-align:center;">Suggestions</h1>
+        {{#each conversation}}
+                   <div id="payload-initial-message"> 
+                   <form action="/my-url"> 
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                   <button id="1" name="1" class="button_question" value="{{Question}}">{{Question}}</button> 
+                   </form>              
+                  </div>
+       {{/each}} 
+              
+       
+       </div>
+              
+      </div>
+
+</body>
+
+<script type='text/javascript'>
+
+$("button").click(function(e) {
+    e.preventDefault();
+    var fired_button = $(this).val();
+    ConversationPanel.inputKeyDown_button(String(fired_button));
+    
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:3000/my-url",
+        data: { "id" : fired_button },
+        cache: false,
+        success: function(result) {
+        },
+        error: function(result) {
+        }
+    });
+    
+});
+
+</script>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $("body").on('click keypress', function () {
+                ResetThisSession();
+            });
+        });
+
+  var timeInSecondsAfterSessionOut = 300; // change this to change session time out (in seconds).
+        var secondTick = 0;
+
+        function ResetThisSession() {
+            secondTick = 0;
+        }
+
+        function StartThisSessionTimer() {
+            secondTick++;
+            var timeLeft = ((timeInSecondsAfterSessionOut - secondTick) / 60).toFixed(0); // in minutes
+        timeLeft = timeInSecondsAfterSessionOut - secondTick;
+
+            $("#spanTimeLeft").html(timeLeft);
+             if(timeLeft==250)
+               $("p").last().after("You are about to be logged out");
+
+            if (secondTick > timeInSecondsAfterSessionOut) {
+                clearTimeout(tick);
+                window.location = "/users/logout";
+                return;
+            }
+            tick = setTimeout("StartThisSessionTimer()", 1000);
+        }
+
+        StartThisSessionTimer();
+</script>
+
+
+  <script src="js/common.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/conversation.js"></script>
+  <script src="js/global.js"></script>
+
+</html>
